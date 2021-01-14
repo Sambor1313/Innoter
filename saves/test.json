@@ -1,0 +1,32 @@
+{
+    "settings": {
+        "title": "Test",
+        "label": "#313100",
+        "styles": {
+            "lines": [
+                {
+                    "id": 1,
+                    "color": "333222",
+                    "thickness": "2"
+                }
+            ]
+        }
+    },
+    "objects": [
+        {
+            "id": 1,
+            "type": "line",
+            "style": 1,
+            "points": [
+                {
+                    "x": 10,
+                    "y": 60
+                },
+                {
+                    "x": 80,
+                    "y": 60
+                }
+            ]
+        }
+    ]
+}

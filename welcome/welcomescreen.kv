@@ -1,0 +1,23 @@
+<WelcomeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        
+        BoxLayout:
+            size_hint: 1, 0.9
+            orientation: 'horizontal'
+            Button:
+                text: 'Open'
+                on_press: 
+                    root.manager.current = 'open'
+                    root.manager.transition.direction = 'left'
+            Button:
+                text: 'New'
+                on_press: 
+                    root.manager.transition.direction = 'left'
+                    root.manager.current = 'draw'
+
+        BoxLayout:
+            size_hint: 1, 0.1
+            Button:
+                text: 'Exit'
+                on_press: app.stop()

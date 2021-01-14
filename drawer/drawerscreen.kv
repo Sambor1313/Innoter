@@ -1,0 +1,141 @@
+#:import utils kivy.utils
+<DrawerScreen>:
+    canvas.before:
+        Color:
+            rgba: (.9,.9,.9,1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    
+    ScrollView:
+        size_hint: 1, 1
+        #size: 200,200
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        FloatLayout:
+            size: 1000, 1000
+            size_hint_y: None
+            size_hint_x: None
+            Button:
+                text: "Scroll"
+                size_hint: None, None
+                size: 480, 40
+            Button:
+                text: "Scroll2"
+                size_hint: None, None
+                size: 480, 40
+                pos_hint: {'x':.9, 'y':.2}
+
+
+    # MainMenu
+    FloatLayout:
+        size: root.width, root.height
+        size_hint: None, None
+        pos: 0, root.height - 50
+
+        canvas.before:
+            Color:
+                rgb: root.label if root.label else (1,1,0) #utils.get_color_from_hex("#5050FA")
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        AnchorLayout:
+            anchor_x: 'left'
+            anchor_y: 'top'
+
+            Button:
+                text: "|||"
+                size: 50, 50
+                size_hint: None, None
+
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'top'
+
+            Label:
+                text: root.title if root.title else 'Not defined'
+                size: root.width, 50
+                size_hint: None, None
+        
+        AnchorLayout:
+            anchor_x: 'right'
+            anchor_y: 'top'
+
+            Button:
+                text: 'save'
+                size: 50, 50
+                size_hint: None, None
+                background_normal: './src/save.png'
+                # Image: 
+                #     source: 'normal.png'
+                #     center_x: self.parent.center_x
+                #     center_y: self.parent.center_y
+                #     size: 1, 1
+
+    # ModeTool
+    GridLayout:
+        cols: 1
+        size: 50, 230
+        size_hint: None, None
+        pos: root.width - 60, root.height - 350
+        spacing: 10
+        
+
+        canvas.before:
+            Color:
+                rgba: (1,0,1,0)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        Button:
+            text: "Draw"
+            size: 50, 50
+            size_hint: None, None
+            border: 0, 0, 0, 0
+
+
+        Button:
+            text: "Select"
+            size: 50, 50
+            size_hint: None, None
+            border: 1, 1, 1, 1
+
+        Button:
+            text: "Text"
+            size: 50, 50
+            size_hint: None, None
+            border: 1, 1, 1, 1
+
+        Button:
+            text: "Table"
+            size: 50, 50
+            size_hint: None, None
+            border: 1, 1, 1, 1
+
+
+    # ML level
+    GridLayout:
+        cols: 1
+        size: 50, 170
+        size_hint: None, None
+        pos: 10, root.height - 350
+        spacing: 5
+        
+        Button:
+            text: "U"
+            size: 50, 50
+            size_hint: None, None
+            border: (1, 1, 1, 18)
+        
+        Button:
+            text: "0"
+            size: 50, 50
+            size_hint: None, None
+            border: (1, 1, 1, 18)
+        
+        Button:
+            text: "D"
+            size: 50, 50
+            size_hint: None, None
+            border: (1, 1, 1, 18)
