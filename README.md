@@ -24,8 +24,9 @@ Fig.1 - drawing screen with tools
 * Kivy 1.11
 
 ## Setup
-1. Git clone
+1. Git clone https://github.com/Sambor1313/Innoter.git
 2. pipenv install --python 3.7
+3. pipenv install kivy (if not find)
 
 ## Features
 List of features to be added planned first:

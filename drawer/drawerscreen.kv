@@ -6,74 +6,85 @@
         Rectangle:
             size: self.size
             pos: self.pos
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        #Top Bar Menu
+        TopBar:
+            cols: 3
+            size: root.width, 50
+            size_hint: None, None
+            #pos: 0, root.height - 50
+
+            canvas.before:
+                Color:
+                    rgb: root.label if root.label else (1,1,0) #utils.get_color_from_hex("#5050FA")
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            AnchorLayout:
+                anchor_x: 'left'
+                anchor_y: 'top'
+
+                Button:
+                    text: "|||"
+                    size: 50, 50
+                    size_hint: None, None
+                    on_press: root.top_bar.file_button()
+
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'top'
+
+                Label:
+                    text: root.title if root.title else 'Not defined'
+                    size: root.width, 50
+                    size_hint: None, None
+            
+            AnchorLayout:
+                anchor_x: 'right'
+                anchor_y: 'top'
+
+                Button:
+                    text: 'save'
+                    size: 50, 50
+                    size_hint: None, None
+                    background_normal: './src/save.png'
+                    on_press: root.top_bar.save_button()
+                    # Image: 
+                    #     source: 'normal.png'
+                    #     center_x: self.parent.center_x
+                    #     center_y: self.parent.center_y
+                    #     size: 1, 1
     
-    ScrollView:
-        size_hint: 1, 1
-        #size: 200,200
-        pos_hint: {'center_x': .5, 'center_y': .5}
-        FloatLayout:
-            size: 1000, 1000
-            size_hint_y: None
-            size_hint_x: None
-            Button:
-                text: "Scroll"
-                size_hint: None, None
-                size: 480, 40
-            Button:
-                text: "Scroll2"
-                size_hint: None, None
-                size: 480, 40
-                pos_hint: {'x':.9, 'y':.2}
+        TableWorkspace:
+            size: root.width, root.height - 50
+            size_hint: None, None
+            #pos_hint: {'center_x': .5, 'center_y': .5}
+            do_scroll_x: True
+            do_scroll_y: True
+            Paper:
+                size: 1000, 1000
+                size_hint_y: None
+                size_hint_x: None
+
+                Button:
+                    text: "Scroll"
+                    size_hint: None, None
+                    size: 480, 40
+                    pos_hint: {'x':.1, 'y':.2}
+                Button:
+                    text: "Scroll2"
+                    size_hint: None, None
+                    size: 480, 40
+                    pos_hint: {'x':.9, 'y':.2}
 
 
-    # MainMenu
-    FloatLayout:
-        size: root.width, root.height
-        size_hint: None, None
-        pos: 0, root.height - 50
-
-        canvas.before:
-            Color:
-                rgb: root.label if root.label else (1,1,0) #utils.get_color_from_hex("#5050FA")
-            Rectangle:
-                size: self.size
-                pos: self.pos
-
-        AnchorLayout:
-            anchor_x: 'left'
-            anchor_y: 'top'
-
-            Button:
-                text: "|||"
-                size: 50, 50
-                size_hint: None, None
-
-        AnchorLayout:
-            anchor_x: 'center'
-            anchor_y: 'top'
-
-            Label:
-                text: root.title if root.title else 'Not defined'
-                size: root.width, 50
-                size_hint: None, None
-        
-        AnchorLayout:
-            anchor_x: 'right'
-            anchor_y: 'top'
-
-            Button:
-                text: 'save'
-                size: 50, 50
-                size_hint: None, None
-                background_normal: './src/save.png'
-                # Image: 
-                #     source: 'normal.png'
-                #     center_x: self.parent.center_x
-                #     center_y: self.parent.center_y
-                #     size: 1, 1
 
     # ModeTool
-    GridLayout:
+    ModeTool:
         cols: 1
         size: 50, 230
         size_hint: None, None
@@ -88,34 +99,44 @@
                 size: self.size
                 pos: self.pos
 
-        Button:
+        ToggleButton:
             text: "Draw"
+            group: 'mode_group'
             size: 50, 50
+            state:'down'
             size_hint: None, None
             border: 0, 0, 0, 0
+            on_press: root.mode_tool.set_mode(0)
 
 
-        Button:
+        ToggleButton:
             text: "Select"
+            group: 'mode_group'
             size: 50, 50
             size_hint: None, None
             border: 1, 1, 1, 1
+            on_press: root.mode_tool.set_mode(1)
 
-        Button:
+        ToggleButton:
             text: "Text"
+            group: 'mode_group'
             size: 50, 50
             size_hint: None, None
             border: 1, 1, 1, 1
+            on_press: root.mode_tool.set_mode(2)
+            disabled: True
 
-        Button:
+        ToggleButton:
             text: "Table"
+            group: 'mode_group'
             size: 50, 50
             size_hint: None, None
             border: 1, 1, 1, 1
-
+            on_press: root.mode_tool.set_mode(3)
+            disabled: True
 
     # ML level
-    GridLayout:
+    MLTool:
         cols: 1
         size: 50, 170
         size_hint: None, None
@@ -123,19 +144,45 @@
         spacing: 5
         
         Button:
-            text: "U"
+            text: "+"
+            font_size: 24
+            size: 50, 50
+            size_hint: None, None
+            border: (1, 1, 1, 18)
+            on_press: root.ml_tool.up_lvl()
+        
+        Button:
+            text: str(root.ml_tool.lvl)
+            font_size: 24
             size: 50, 50
             size_hint: None, None
             border: (1, 1, 1, 18)
         
         Button:
-            text: "0"
+            text: "-"
+            font_size: 24
             size: 50, 50
             size_hint: None, None
             border: (1, 1, 1, 18)
-        
+            on_press: root.ml_tool.down_lvl()
+
+    StyleManager:
+        size: 100, 100
+        size_hint: None, None
+        pos: 100, 100
+
+        l1:
+        # canvas:
+        #     Line:
+        #         points: (0,80), (80,80)
+
+
         Button:
-            text: "D"
-            size: 50, 50
+            text: "Ab"#str(root.style_manager.option_sets[0][0]) if root.style_manager else "Aa"
+            size: 70, 70,
             size_hint: None, None
-            border: (1, 1, 1, 18)
+            pos: 0, 0
+
+
+
+    
